@@ -1,65 +1,91 @@
 import Image from "next/image";
+import Aurora from "./components/Aurora/Aurora";
+import Lanyard from "./components/Lanyard/Lanyard";
+import AnimatedContent from "./components/AnimatedContent/AnimatedContent";
+import RotatingText from "./components/RotatingText/RotatingText";
+import SplitText from "./components/SplitText/SplitText";
+import BlurText from "./components/BlurText/BlurText";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    
+    <div className="min-h-screen overflow-x-hidden">
+      <div className="absolute top-0 left-0 bottom-0 w-full h-full">
+        <Aurora
+          colorStops={["#ffb0b0","#ffd0d0","#fff0f0"]}
+          blend={0.5}
+          amplitude={1.0}
+          speed={1}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+      </div>
+      <div className="container mx-auto h-screen">
+        <div className="grid grid-cols-12">
+          <div className="col-span-6">
+            <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
+          </div>
+          <div className="col-span-6">
+            <div className="flex items-center h-full">
+              <div className="flex flex-col gap-6">
+                <AnimatedContent 
+                  distance={150}
+                  direction="horizontal"
+                  reverse={false}
+                  config={{ tension: 80, friction: 20 }}
+                  initialOpacity={0.2}
+                  animateOpacity
+                  scale={1.1}
+                  threshold={0.2}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                  <h1 className="text-2xl text-[#FFFFFF] font-bold">MY</h1>
+                    <RotatingText
+                      texts={['FullStack Programmer', 'Mobile Programmer']}
+                      mainClassName="px-2 sm:px-2 md:px-3 bg-[#ff9e9e] text-[FFFFFF] overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg text-xl font-bold inline-flex transition-all"
+                      staggerFrom={"last"}
+                      initial={{ y: "100%" }}
+                      animate={{ y: 0 }}
+                      exit={{ y: "-120%" }}
+                      staggerDuration={0.025}
+                      splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+                      transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                      rotationInterval={2000}
+                    />
+                  </div>
+                </AnimatedContent>
+                <div className="flex flex-col items-start">
+                  <SplitText
+                    text="Hello, I'am Mochamad Yusuf"
+                    className="text-3xl font-semibold text-start text-[#4F0341]"
+                    delay={100}
+                    from={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+                    to={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+                    threshold={0.2}
+                    rootMargin="-50px"
+                  />
+                  <SplitText
+                    text="I'am Programmer"
+                    className="text-3xl font-semibold text-start text-[#4F0341]"
+                    delay={60}
+                    from={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+                    to={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+                    threshold={0.2}
+                    rootMargin="-50px"
+                  />
+                </div>
+                <div>
+                  <BlurText
+                    text="Saya Mochamad Yusuf, lulusan universitas kuningan. Saya telah berpengalaman menjadi programmer di ASTEX Solution dari tahun 2018 - 2020 membuat website MLM, optimasi query 10x, dan membuat aplikasi mobile MLM. Saya sekarang menjadi Programmer Freelancer mengerjakan website SPMB SMK Muhamadiyyah 2 Kuningan dan tracer study Universitas Siber Syekh Nurjati"
+                    delay={75}
+                    animateBy="words"
+                    direction="top"
+                    className="text-xl mb-8 text-[#4F0341] justify-between"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </div>
     </div>
   );
 }
