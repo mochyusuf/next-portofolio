@@ -30,7 +30,6 @@ export default function Home() {
                   distance={150}
                   direction="horizontal"
                   reverse={false}
-                  config={{ tension: 80, friction: 20 }}
                   initialOpacity={0.2}
                   animateOpacity
                   scale={1.1}

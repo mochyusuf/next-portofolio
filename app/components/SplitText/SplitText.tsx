@@ -167,9 +167,7 @@ const SplitText: React.FC<SplitTextProps> = ({
     const Tag = (tag || 'p') as React.ElementType;
 
     return (
-      <Tag ref={ref} style={style} className={classes}>
-        {text}
-      </Tag>
+      <p ref={ref} style={style} className={classes}>{text}</p>
     );
   };
 
