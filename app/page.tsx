@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Aurora from "./components/Aurora/Aurora";
-import Lanyard from "./components/Lanyard/Lanyard";
+import TiltedCard from "./components/TiltedCard/TiltedCard";
 import AnimatedContent from "./components/AnimatedContent/AnimatedContent";
 import RotatingText from "./components/RotatingText/RotatingText";
 import SplitText from "./components/SplitText/SplitText";
@@ -21,7 +21,22 @@ export default function Home() {
       <div className="container mx-auto h-screen">
         <div className="grid grid-cols-12">
           <div className="col-span-6">
-            <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
+            <div className="w-1/2 mx-auto p-6">
+              <TiltedCard
+                imageSrc="assets/titled-card/Foto_1_x_1.jpg"
+                altText="Mochamad Yusuf - Programmer"
+                captionText="Mochamad Yusuf - Programmer"
+                containerHeight="300px"
+                containerWidth="300px"
+                imageHeight="300px"
+                imageWidth="300px"
+                rotateAmplitude={12}
+                scaleOnHover={1.05}
+                showMobileWarning={false}
+                showTooltip
+                displayOverlayContent
+              />
+            </div>
           </div>
           <div className="col-span-6">
             <div className="flex items-center h-full">
