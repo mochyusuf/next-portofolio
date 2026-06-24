@@ -25,64 +25,60 @@ export default function Home() {
       </div>
 
       {/* Navigation */}
-      <nav className="relative z-50 container mx-auto px-6 py-8">
-        <div className="flex justify-between items-center backdrop-blur-xl bg-white/90 rounded-2xl px-8 py-4 shadow-lg shadow-neutral-200/40 border border-white/70">
-          <AnimatedContent 
-            distance={60}
-            direction="horizontal"
-            reverse={false}
-            initialOpacity={0}
-            animateOpacity
-            threshold={0.1}
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-neutral-800 to-slate-700 rounded-xl flex items-center justify-center shadow-lg">
-                <span className="text-white text-lg font-bold">MY</span>
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-blue-100 shadow-sm">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <AnimatedContent 
+              distance={30}
+              direction="horizontal"
+              reverse={false}
+              initialOpacity={0}
+              animateOpacity
+              threshold={0.1}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-red-800 to-rose-700 rounded-xl flex items-center justify-center shadow-lg">
+                  <span className="text-white text-sm font-bold">MY</span>
+                </div>
+                <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-black">Mochamad Yusuf</span>
               </div>
-            </div>
-          </AnimatedContent>
-          
-          <AnimatedContent 
-            distance={60}
-            direction="horizontal"
-            reverse={true}
-            initialOpacity={0}
-            animateOpacity
-            threshold={0.1}
-          >
-            <div className="hidden md:flex space-x-8">
-              {['Home', 'About', 'Projects', 'Contact'].map((item) => (
-                <a 
-                  key={item}
-                  href={`#${item.toLowerCase()}`} 
-                  className="text-neutral-700 hover:text-neutral-900 transition-all duration-300 font-medium relative group px-3 py-2"
-                >
-                  {item}
-                  <span className="absolute -bottom-1 left-3 w-0 h-0.5 bg-gradient-to-r from-neutral-800 to-slate-600 group-hover:w-[calc(100%-24px)] transition-all duration-300 rounded-full"></span>
-                </a>
-              ))}
-            </div>
-          </AnimatedContent>
+            </AnimatedContent>
+            
+            <AnimatedContent 
+              distance={30}
+              direction="horizontal"
+              reverse={true}
+              initialOpacity={0}
+              animateOpacity
+              threshold={0.1}
+            >
+              <div className="hidden md:flex items-center gap-8">
+                {['Home', 'About', 'Projects', 'Contact'].map((item) => (
+                  <a 
+                    key={item}
+                    href={`#${item.toLowerCase()}`} 
+                    className="text-slate-600 hover:text-blue-600 transition-colors font-medium text-sm relative group"
+                  >
+                    {item}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
+                  </a>
+                ))}
+                <button className="px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-300">
+                  Let's Talk
+                </button>
+              </div>
+            </AnimatedContent>
 
-          {/* Mobile Menu Button */}
-          <AnimatedContent 
-            distance={60}
-            direction="horizontal"
-            reverse={true}
-            initialOpacity={0}
-            animateOpacity
-            threshold={0.1}
-          >
-            <button className="md:hidden p-3 text-neutral-700 hover:bg-neutral-50 rounded-xl transition-colors">
+            <button className="md:hidden p-2 text-slate-600 hover:text-blue-600 transition-colors">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
-          </AnimatedContent>
+          </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* About Section */}
       <section id="home" className="relative z-10 container mx-auto px-6 pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 min-h-[calc(100vh-160px)] items-center">
 
@@ -251,408 +247,296 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="relative z-10 container mx-auto px-6 py-24">
-        <AnimatedContent 
-          distance={100}
-          direction="vertical"
-          reverse={false}
-          initialOpacity={0}
-          animateOpacity
-          threshold={0.3}
-        >
-          <div className="text-center mb-20">
-            <h2 className="text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-neutral-800 via-slate-700 to-zinc-600 bg-clip-text text-transparent">
-              About Me
-            </h2>
-            <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed font-light">
-              Passionate about learning new technology and creating innovate digital solution
-            </p>
-          </div>
-        </AnimatedContent>
-
-        <div className="max-w-6xl mx-auto">
+      {/* Projects Section */}
+      <section id="projects" className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div className="container mx-auto px-6">
           <AnimatedContent 
             distance={80}
             direction="vertical"
             reverse={false}
             initialOpacity={0}
             animateOpacity
-            threshold={0.4}
-            scale={1.01}
+            threshold={0.3}
           >
-            <div className="bg-white/80 backdrop-blur-xl rounded-2xl p-12 shadow-2xl shadow-neutral-200/40 border border-white/70">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div className="space-y-6">
-                  <h3 className="text-3xl font-bold bg-gradient-to-r from-neutral-800 to-slate-600 bg-clip-text text-transparent mb-6">
-                    My Journey
-                  </h3>
-                  <p className="text-neutral-600 leading-relaxed text-lg font-light">
-                    I am passionate about full-stack development, mobile development 
-                    while creating innovative digital solutions. 
-                  </p>
-                  
-                  <div className="space-y-4 pt-6">
-                    {[
-                      { icon: "💻", text: "Full-Stack Development", desc: "Modern web technologies enthusiast" },
-                      { icon: "📱", text: "Mobile Programmer", desc: "Mobile application creator" },
-                      { icon: "🚀", text: "Innovation & Problem Solving", desc: "Creating impactful solutions" }
-                    ].map((item, index) => (
-                      <div key={index} className="flex items-start gap-4 p-5 bg-white/60 rounded-xl border border-white/50 hover:shadow-lg transition-all duration-300">
-                        <div className="w-12 h-12 bg-gradient-to-br from-neutral-100 to-slate-100 rounded-xl flex items-center justify-center text-2xl shadow-sm border border-white/60">
-                          {item.icon}
-                        </div>
-                        <div>
-                          <h4 className="text-neutral-800 font-semibold mb-1">{item.text}</h4>
-                          <p className="text-neutral-600 text-sm font-light">{item.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="space-y-6">
-                  <div className="bg-gradient-to-br from-neutral-50 to-slate-50 rounded-xl p-8 border border-white/60 shadow-lg">
-                    <h4 className="text-xl font-bold text-neutral-800 mb-4 flex items-center gap-2">
-                      <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
-                      Current Focus
-                    </h4>
-                    <ul className="space-y-3 text-neutral-600">
-                      <li className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 bg-neutral-400 rounded-full"></span>
-                        Full-Stack Website Development
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 bg-neutral-400 rounded-full"></span>
-                        User Experience & User Interface
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 bg-neutral-400 rounded-full"></span>
-                        Cloud Computing & Containerization
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div className="bg-gradient-to-br from-slate-50 to-zinc-50 rounded-xl p-8 border border-white/60 shadow-lg">
-                    <h4 className="text-xl font-bold text-neutral-800 mb-4 flex items-center gap-2">
-                      <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
-                      Vision
-                    </h4>
-                    <p className="text-neutral-600 leading-relaxed font-light">
-                      To become expert in software enginering field that created meaningful digital experience and continuously learning in this evolving field with AI assistant
-                    </p>
-                  </div>
-                </div>
-              </div>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent mb-6">Featured Projects</h2>
             </div>
           </AnimatedContent>
-        </div>
-      </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="relative z-10 container mx-auto px-6 py-24">
-        <AnimatedContent 
-          distance={100}
-          direction="vertical"
-          reverse={false}
-          initialOpacity={0}
-          animateOpacity
-          threshold={0.3}
-        >
-          <div className="text-center mb-20">
-            <h2 className="text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-neutral-800 via-slate-700 to-zinc-600 bg-clip-text text-transparent">
-              Featured Projects
-            </h2>
-          </div>
-        </AnimatedContent>
-
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {[
-              {
-                title: "Portfolio Website",
-                description: "Modern, responsive portfolio with smooth animations, 3D object, and interactive components showcasing contemporary web development.",
-                tech: ["Next.js", "Three.js", "Framer Motion", "CSS3"],
-                status: "Live",
-                type: "Personal Project"
-              },
-              {
-                title: "Congklak Game",
-                description: "Traditional congklak game mobile with 2D graphic, simple gameplay created using Unity Game Engine.",
-                tech: ["2D game", "Simple gameplay", "Unity Game Engine", "Android"],
-                status: "Completed",
-                type: "Mobile Game"
-              }
-            ].map((project, index) => (
-              <AnimatedContent 
-                key={index}
-                distance={80}
-                direction={index % 2 === 0 ? "horizontal" : "horizontal"}
-                reverse={index % 2 !== 0}
-                initialOpacity={0}
-                animateOpacity
-                threshold={0.4}
-              >
-                <div className="group bg-white/80 backdrop-blur-xl rounded-2xl p-8 shadow-xl border border-white/70 hover:shadow-2xl hover:scale-[1.02] transition-all duration-500">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="space-y-2">
-                      <div className="inline-flex items-center gap-2 px-3 py-1 bg-neutral-100 text-neutral-700 rounded-lg text-sm font-medium border border-white/40">
-                        {project.type}
-                      </div>
-                      <div className={`inline-flex items-center gap-2 px-4 py-2 ${
-                        project.status === 'Live' ? 'bg-emerald-100 text-emerald-700' :
-                        project.status === 'Completed' ? 'bg-blue-100 text-blue-700' :
-                        'bg-amber-100 text-amber-700'
-                      } rounded-xl font-semibold shadow-sm`}>
-                        <span className={`w-2 h-2 rounded-full ${
-                          project.status === 'Live' ? 'bg-emerald-500' :
-                          project.status === 'Completed' ? 'bg-blue-500' :
-                          'bg-amber-500'
-                        }`}></span>
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Portfolio Website",
+                  description: "Modern, responsive portfolio with smooth animations, 3D object, and interactive components showcasing contemporary web development.",
+                  tech: ["Next.js", "Three.js", "Framer Motion", "CSS3"],
+                  status: "Live",
+                  statusColor: "bg-green-100 text-green-800 border-green-200",
+                  type: "Personal Project"
+                },
+                {
+                  title: "Congklak Game",
+                  description: "Traditional congklak game mobile with 2D graphic, simple gameplay created using Unity Game Engine.",
+                  tech: ["2D game", "Simple gameplay", "Unity Game Engine", "Android"],
+                  status: "Completed",
+                  statusColor: "bg-amber-100 text-amber-800 border-amber-200",
+                  type: "Mobile Game"
+                }
+              ].map((project, index) => (
+                <AnimatedContent 
+                  key={index}
+                  distance={60}
+                  direction="vertical"
+                  reverse={false}
+                  initialOpacity={0}
+                  animateOpacity
+                  threshold={0.4}
+                >
+                  <div className="bg-white/80 backdrop-blur-sm border border-blue-100 rounded-2xl p-6 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group">
+                    <div className="flex justify-between items-start mb-4">
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium border ${project.statusColor}`}>
                         {project.status}
+                      </span>
+                      <div className="flex gap-2">
+                        <button className="w-8 h-8 bg-blue-100 hover:bg-blue-200 rounded-lg flex items-center justify-center transition-colors group-hover:scale-110 duration-300">
+                          <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                        </button>
+                        <button className="w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-lg flex items-center justify-center transition-colors group-hover:scale-110 duration-300">
+                          <svg className="w-4 h-4 text-slate-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                          </svg>
+                        </button>
                       </div>
                     </div>
-                    <div className="flex gap-2">
-                      <button className="w-10 h-10 bg-white/60 hover:bg-white/80 rounded-xl flex items-center justify-center transition-colors border border-white/50">
-                        <svg className="w-5 h-5 text-neutral-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                      </button>
-                      <button className="w-10 h-10 bg-white/60 hover:bg-white/80 rounded-xl flex items-center justify-center transition-colors border border-white/50">
-                        <svg className="w-5 h-5 text-neutral-700" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                      </button>
+                    
+                    <h3 className="text-xl font-bold text-slate-800 mb-3">{project.title}</h3>
+                    <p className="text-slate-600 mb-4 leading-relaxed">{project.description}</p>
+                    
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((tech, techIndex) => (
+                        <span key={techIndex} className="px-3 py-1 bg-blue-100 text-blue-700 rounded-lg text-sm font-medium">
+                          {tech}
+                        </span>
+                      ))}
                     </div>
                   </div>
-                  
-                  <h3 className="text-2xl font-bold text-neutral-800 mb-4 group-hover:text-neutral-900 transition-colors">
-                    {project.title}
-                  </h3>
-                  
-                  <p className="text-neutral-600 leading-relaxed mb-6 font-light">
-                    {project.description}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech, techIndex) => (
-                      <span key={techIndex} className="px-3 py-1 bg-white/70 text-neutral-700 rounded-lg text-sm font-medium border border-white/50">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </AnimatedContent>
-            ))}
+                </AnimatedContent>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="relative z-10 container mx-auto px-6 py-24">
-        <AnimatedContent 
-          distance={100}
-          direction="vertical"
-          reverse={false}
-          initialOpacity={0}
-          animateOpacity
-          threshold={0.3}
-        >
-          <div className="text-center mb-20">
-            <h2 className="text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-neutral-800 via-slate-700 to-zinc-600 bg-clip-text text-transparent">
-              Let's Connect
-            </h2>
-          </div>
-        </AnimatedContent>
+      <section id="contact" className="py-20 bg-white/50 backdrop-blur-sm">
+        <div className="container mx-auto px-6">
+          <AnimatedContent 
+            distance={80}
+            direction="vertical"
+            reverse={false}
+            initialOpacity={0}
+            animateOpacity
+            threshold={0.3}
+          >
+            <div className="text-center mb-16">
+              <h2 className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent mb-6">Let's Connect</h2>
+              <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+                Ready to collaborate or just want to say hello?
+              </p>
+            </div>
+          </AnimatedContent>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <AnimatedContent 
-              distance={80}
-              direction="horizontal"
-              reverse={false}
-              initialOpacity={0}
-              animateOpacity
-              threshold={0.4}
-            >
-              <div className="space-y-8">
-                <div>
-                  <h3 className="text-3xl font-bold text-neutral-800 mb-6">Get in Touch</h3>
-                  <p className="text-neutral-600 leading-relaxed text-lg font-light mb-8">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              <AnimatedContent 
+                distance={60}
+                direction="horizontal"
+                reverse={false}
+                initialOpacity={0}
+                animateOpacity
+                threshold={0.4}
+              >
+                <div className="space-y-8">
+                  <h3 className="text-3xl font-bold text-slate-800">Get in Touch</h3>
+                  <p className="text-slate-600 leading-relaxed text-lg">
                     I'm always open to new opportunities, projects, or just chat about technology.
                   </p>
-                </div>
 
-                <div className="space-y-6">
-                  {[
-                    {
-                      icon: (
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                      ),
-                      title: "Email",
-                      content: "mochyusuf100@gmail.com"
-                    },
-                    {
-                      icon: (
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                        </svg>
-                      ),
-                      title: "Phone",
-                      content: "+6285221120369"
-                    },
-                    {
-                      icon: (
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                      ),
-                      title: "Location",
-                      content: "Kuningan, Indonesia"
-                    }
-                  ].map((contact, index) => (
-                    <div key={index} className="flex items-center gap-4 p-6 bg-white/70 backdrop-blur-sm rounded-xl border border-white/60 hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
-                      <div className="w-14 h-14 bg-gradient-to-br from-neutral-100 to-slate-100 text-neutral-700 rounded-xl flex items-center justify-center shadow-lg border border-white/60">
-                        {contact.icon}
+                  <div className="space-y-6">
+                    {[
+                      {
+                        icon: (
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                          </svg>
+                        ),
+                        title: "Email",
+                        content: "mochyusuf100@gmail.com",
+                        color: "from-red-500 to-rose-500"
+                      },
+                      {
+                        icon: (
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+                        ),
+                        title: "Location",
+                        content: "Kuningan, Indonesia",
+                        color: "from-violet-500 to-purple-500"
+                      },
+                      {
+                        icon: (
+                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                          </svg>
+                        ),
+                        title: "LinkedIn",
+                        content: "/in/mocha-yusuf",
+                        color: "from-blue-600 to-blue-700"
+                      },
+                      {
+                        icon: (
+                          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                          </svg>
+                        ),
+                        title: "Phone",
+                        content: "+6285221120369",
+                        color: "from-stone-600 to-mist-800"
+                      }
+                    ].map((contact, index) => (
+                      <div key={index} className="flex items-center gap-4 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-blue-100 hover:shadow-lg transition-all duration-300 group">
+                        <div className={`w-12 h-12 bg-gradient-to-r ${contact.color} text-white rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                          {contact.icon}
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-slate-800">{contact.title}</h4>
+                          <p className="text-slate-600">{contact.content}</p>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="font-semibold text-neutral-800 mb-1">{contact.title}</h4>
-                        <p className="text-neutral-600">{contact.content}</p>
-                      </div>
+                    ))}
+                  </div>
+                </div>
+              </AnimatedContent>
+
+              <AnimatedContent 
+                distance={60}
+                direction="horizontal"
+                reverse={true}
+                initialOpacity={0}
+                animateOpacity
+                threshold={0.4}
+              >
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-blue-100 shadow-xl">
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-2">Name</label>
+                      <input 
+                        type="text" 
+                        className="w-full px-4 py-3 border border-blue-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white/50 backdrop-blur-sm"
+                        placeholder="Name"
+                      />
                     </div>
-                  ))}
+                    
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-2">Email</label>
+                      <input 
+                        type="email" 
+                        className="w-full px-4 py-3 border border-blue-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white/50 backdrop-blur-sm"
+                        placeholder="email@example.com"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-slate-700 font-semibold mb-2">Message</label>
+                      <textarea 
+                        rows={4}
+                        className="w-full px-4 py-3 border border-blue-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none bg-white/50 backdrop-blur-sm"
+                        placeholder="Tell me about your project or just say hello!"
+                      ></textarea>
+                    </div>
+                    
+                    <button className="w-full px-8 py-4 bg-gradient-to-r from-neutral-800 via-slate-700 to-zinc-800 text-white rounded-xl font-semibold shadow-xl shadow-neutral-500/20 hover:shadow-neutral-500/30 transform hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2">
+                      Send Message
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </AnimatedContent>
-
-            <AnimatedContent 
-              distance={80}
-              direction="horizontal"
-              reverse={true}
-              initialOpacity={0}
-              animateOpacity
-              threshold={0.4}
-            >
-              <div className="bg-white/80 backdrop-blur-xl rounded-2xl p-8 shadow-xl border border-white/70">
-                <form className="space-y-6">
-                  <div>
-                    <label className="block text-neutral-700 font-medium mb-2">Name</label>
-                    <input 
-                      type="text" 
-                      className="w-full px-4 py-3 bg-white/60 border border-white/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:border-transparent transition-all"
-                      placeholder="Name"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-neutral-700 font-medium mb-2">Email</label>
-                    <input 
-                      type="email" 
-                      className="w-full px-4 py-3 bg-white/60 border border-white/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:border-transparent transition-all"
-                      placeholder="email@example.com"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-neutral-700 font-medium mb-2">Message</label>
-                    <textarea 
-                      rows={4}
-                      className="w-full px-4 py-3 bg-white/60 border border-white/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:border-transparent transition-all resize-none"
-                      placeholder="Tell me about your project or just say hello!"
-                    ></textarea>
-                  </div>
-                  
-                  <button className="w-full px-8 py-4 bg-gradient-to-r from-neutral-800 via-slate-700 to-zinc-800 text-white rounded-xl font-semibold shadow-xl shadow-neutral-500/20 hover:shadow-neutral-500/30 transform hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2">
-                    Send Message
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                    </svg>
-                  </button>
-                </form>
-              </div>
-            </AnimatedContent>
+              </AnimatedContent>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Floating Action Buttons */}
-      <div className="fixed bottom-8 right-8 z-50 flex flex-col gap-4">
-        {/* Scroll to Top Button */}
-        <button 
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="w-14 h-14 bg-white/80 backdrop-blur-sm text-neutral-700 rounded-xl shadow-xl hover:shadow-2xl transform hover:scale-110 transition-all duration-300 flex items-center justify-center border border-white/60 hover:bg-white/95"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-          </svg>
-        </button>
-      </div>
-
       {/* Footer */}
-      <footer className="relative z-10 container mx-auto px-6 py-16 mt-20">
-        <div className="bg-white/80 backdrop-blur-xl rounded-2xl p-12 border border-white/70 shadow-xl">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
-            <div className="text-center md:text-left">
-              <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-neutral-800 to-slate-700 rounded-xl flex items-center justify-center shadow-lg">
-                  <span className="text-white text-xl font-bold">MY</span>
-                </div>
+      <footer className="py-12 bg-gradient-to-r from-slate-800 to-slate-900 text-white">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="flex items-center gap-3 mb-6 md:mb-0">
+              <div className="w-10 h-10 bg-gradient-to-r from-red-400 to-red-800 rounded-xl flex items-center justify-center shadow-lg">
+                <span className="text-white text-sm font-bold">MY</span>
               </div>
-              <p className="text-neutral-600 font-light leading-relaxed">
-                Code one line at a time using IDE
-              </p>
+              <span className="text-xl font-bold">Mochamad Yusuf</span>
             </div>
             
-            <div className="text-center">
-              <p className="text-neutral-600 font-medium mb-2">
-                © {currentYear} Mochamad Yusuf
-              </p>
-              <p className="text-neutral-500 text-sm">
-                Created using React & Next.js
-              </p>
-            </div>
-            
-            <div className="flex justify-center md:justify-end gap-4">
+            <div className="flex items-center gap-6 mb-6 md:mb-0">
               {[
                 {
+                  name: "GitHub",
+                  href: "https://github.com/mochyusuf",
                   icon: (
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                     </svg>
-                  ),
-                  href: "mailto:mochyusuf100@gmail.com",
-                  color: "hover:bg-emerald-600"
+                  )
                 },
                 {
+                  name: "LinkedIn",
+                  href: "https://www.linkedin.com/in/mocha-yusuf/",
+                  icon: (
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                  )
+                },
+                {
+                  name: "Email",
+                  href: "mailto:mochyusuf100@gmail.com",
+                  icon: (
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  )
+                },
+                {
+                  name: "Telp",
                   icon: (
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                   ),
-                  href: "tel:+6285221120369",
-                  color: "hover:bg-blue-600"
-                },
-                {
-                  icon: (
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                  ),
-                  href: "https://www.linkedin.com/in/mocha-yusuf/",
-                  color: "hover:bg-blue-700"
+                  href: "tel:+6285221120369"
                 }
               ].map((social, index) => (
                 <a 
                   key={index}
-                  href={social.href} 
-                  className={`w-12 h-12 bg-white/60 text-neutral-700 rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 border border-white/50 ${social.color} hover:text-white`}
+                  href={social.href}  
+                  className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-110"
+                  title={social.name}
                 >
                   {social.icon}
                 </a>
               ))}
+            </div>
+            
+            <div className="text-center md:text-right">
+              <p className="text-slate-300">© {currentYear} Mochamad Yusuf</p>
+              <p className="text-slate-400 text-sm">Created using React & Next.js</p>
             </div>
           </div>
         </div>
@@ -669,6 +553,16 @@ export default function Home() {
         <div className="absolute top-0 left-0 w-1/4 h-1/4 bg-gradient-to-br from-neutral-500/2 to-transparent rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-0 w-1/4 h-1/4 bg-gradient-to-tl from-slate-500/2 to-transparent rounded-full blur-3xl"></div>
       </div>
+
+      {/* Scroll to Top Button */}
+      <button 
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-red-400 to-red-800 text-white rounded-full shadow-xl hover:shadow-2xl hover:scale-110 transition-all duration-300 flex items-center justify-center z-50 group"
+      >
+        <svg className="w-6 h-6 group-hover:-translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+      </button>
     </div>
   );
 }
