@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from "react";
 import Image from "next/image";
 import Aurora from "./components/Aurora/Aurora";
 import TiltedCard from "./components/TiltedCard/TiltedCard";
@@ -7,245 +8,549 @@ import AnimatedContent from "./components/AnimatedContent/AnimatedContent";
 import RotatingText from "./components/RotatingText/RotatingText";
 import SplitText from "./components/SplitText/SplitText";
 import BlurText from "./components/BlurText/BlurText";
+import Iridescence from "./components/Iridescence/Iridescence";
+import Lightfall from "./components/Lightfall/Lightfall";
+
+// ─── Data ───────────────────────────────────────────────────────────────────
+
+const PROJECTS = [
+  {
+    title: "Portofolio Website",
+    description:
+      "Modern, responsive portfolio with smooth animations, 3D object, and interactive components showcasing contemporary web development.",
+    tech: ["Next.js", "Tailwind.css", "Framer Motion", "CSS3"],
+    status: "Live",
+    statusColor: "bg-purple-100 text-purple-800 border-purple-200",
+    gradient: "from-teal-400 to-cyan-500",
+    image: "/assets/projects/portofolio.jpg",
+    github: "https://github.com/mochyusuf/next-portofolio",
+    live: "https://moch-yusuf.vercel.app/",
+  },
+  {
+    title: "Congklak Game",
+    description:
+      "Traditional congklak game mobile with 2D graphic, simple gameplay created using Unity Game Engine.",
+    tech: ["2D game", "Simple gameplay", "Unity Game Engine", "Android", "C#"],
+    status: "Live",
+    statusColor: "bg-purple-100 text-purple-800 border-purple-200",
+    gradient: "from-teal-400 to-cyan-500",
+    image: "/assets/projects/congklak.jpg",
+    github: "https://github.com/mochyusuf/Congklak",
+    live: "https://play.google.com/store/apps/details?id=com.mochyusuf.congklak",
+  }
+];
+
+const CERTIFICATES = [
+  {
+    title: "Sertifikat Kompetensi BNSP",
+    issuer: "Badan Nasional Sertifikasi Profesi",
+    date: "4 Agustus 2023",
+    color: "from-blue-500 to-indigo-600",
+    icon: "🏅",
+    image: "/assets/certificates/serti_1.jpg",
+    placeholder: false,
+    description: "Telah dinyatakan kompeten pada bidang web development atau pengembangan website dengan kualifikasi junior web development",
+  }
+];
+
+// ─── Helper: scroll ke section ───────────────────────────────────────────────
+const scrollTo = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+};
 
 export default function Home() {
   const currentYear = new Date().getFullYear();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [selectedCertificate, setSelectedCertificate] = useState<any>(null);
+  const [selectedProject, setSelectedProject] = useState<any>(null);
 
   return (
     
     <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-neutral-50 via-slate-50/80 to-zinc-50/90 selection:bg-neutral-200/40">
-      {/* Aurora Background */}
-      <div className="fixed top-0 left-0 w-full h-full pointer-events-none">
-        <Aurora
-          colorStops={["#ffe2e2","#d0e5ff","#ddecff"]}
-          blend={1.2}
-          amplitude={0}
-          speed={0.2}
+
+      {/* Lightfall Background */}
+      <div className="fixed inset-0 z-0 opacity-30">
+        <Lightfall
+          colors={['#ffa6a6', '#ff2727', '#ff9f9f']}
+          backgroundColor="#ff8484"
+          speed={0.5}
+          streakCount={2}
+          streakWidth={1}
+          streakLength={1}
+          glow={1}
+          density={0.6}
+          twinkle={1}
+          zoom={3}
+          backgroundGlow={0.5}
+          opacity={1}
+          mouseInteraction
+          mouseStrength={0.5}
+          mouseRadius={1}
         />
       </div>
 
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-blue-100 shadow-sm">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <AnimatedContent 
-              distance={30}
-              direction="horizontal"
-              reverse={false}
-              initialOpacity={0}
-              animateOpacity
-              threshold={0.1}
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-red-800 to-rose-700 rounded-xl flex items-center justify-center shadow-lg">
-                  <span className="text-white text-sm font-bold">MY</span>
-                </div>
-                <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-black">Mochamad Yusuf</span>
-              </div>
-            </AnimatedContent>
-            
-            <AnimatedContent 
-              distance={30}
-              direction="horizontal"
-              reverse={true}
-              initialOpacity={0}
-              animateOpacity
-              threshold={0.1}
-            >
-              <div className="hidden md:flex items-center gap-8">
-                {['Home', 'About', 'Projects', 'Contact'].map((item) => (
-                  <a 
-                    key={item}
-                    href={`#${item.toLowerCase()}`} 
-                    className="text-slate-600 hover:text-blue-600 transition-colors font-medium text-sm relative group"
-                  >
-                    {item}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
-                  </a>
-                ))}
-                <button className="px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-300">
-                  Let's Talk
-                </button>
-              </div>
-            </AnimatedContent>
+      {/* Content Container */}
+      <div className="relative z-10">
 
-            <button className="md:hidden p-2 text-slate-600 hover:text-blue-600 transition-colors">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* About Section */}
-      <section id="home" className="relative z-10 container mx-auto px-6 pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 min-h-[calc(100vh-160px)] items-center">
-
-          {/* Left Content */}
-          <div className="lg:col-span-5 order-1 lg:order-1 flex justify-center lg:justify-end">
-            <div className="relative w-full h-[400px] lg:h-[500px] flex items-center justify-center">
-              {/* Decorative Background */}
-              <div className="absolute -top-8 -left-8 w-16 h-16 bg-gradient-to-br from-neutral-500/5 to-slate-500/5 rounded-full blur-xl"></div>
-              <div className="absolute -bottom-6 -right-6 w-12 h-12 bg-gradient-to-br from-zinc-500/5 to-neutral-500/5 rounded-full blur-lg"></div>
-              
-              {/* TiltedCard */}
-              <div className="w-[250px] h-auto scale-75 lg:scale-90">
-                <TiltedCard
-                  imageSrc="assets/titled-card/Foto_1_x_1.jpg"
-                  altText="Mochamad Yusuf - Programmer"
-                  captionText="Mochamad Yusuf - Programmer"
-                  containerHeight="300px"
-                  containerWidth="300px"
-                  imageHeight="300px"
-                  imageWidth="300px"
-                  rotateAmplitude={12}
-                  scaleOnHover={1.05}
-                  showMobileWarning={false}
-                  showTooltip
-                  displayOverlayContent
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Right Content */}
-          <div className="lg:col-span-7 order-2 lg:order-2">
-            <div className="flex flex-col gap-8 max-w-4xl">
-              {/* Status Badge */}
-              <AnimatedContent 
-                distance={100}
-                direction="vertical"
+        {/* Navigation */}
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-blue-100 shadow-sm">
+          <div className="container mx-auto px-6 py-4">
+            <div className="flex justify-between items-center">
+              <AnimatedContent
+                distance={30}
+                direction="horizontal"
                 reverse={false}
                 initialOpacity={0}
                 animateOpacity
                 threshold={0.1}
               >
-                <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/80 backdrop-blur-sm rounded-full border border-neutral-200/60 text-neutral-700 font-medium w-fit shadow-lg">
-                  <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-sm"></div>
-                  Available for opportunities
+                <button
+                  onClick={() => scrollTo("home")}
+                  className="flex items-center gap-3"
+                >
+                  <div className="w-10 h-10 bg-gradient-to-r from-red-600 to-rose-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <span className="text-white text-sm font-bold">MY</span>
+                  </div>
+                  <span className="text-xl font-bold bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent">
+                    Mochamad Yusuf
+                  </span>
+                </button>
+              </AnimatedContent>
+
+              <AnimatedContent
+                distance={30}
+                direction="horizontal"
+                reverse={true}
+                initialOpacity={0}
+                animateOpacity
+                threshold={0.1}
+              >
+                <div className="hidden md:flex items-center gap-8">
+                  {[
+                    { label: "Home", id: "home" },
+                    { label: "About", id: "about" },
+                    { label: "Projects", id: "projects" },
+                    { label: "Certificates", id: "certificates" },
+                    { label: "Contact", id: "contact" },
+                  ].map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => scrollTo(item.id)}
+                      className="text-slate-600 hover:text-blue-600 transition-colors font-medium text-sm relative group"
+                    >
+                      {item.label}
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full" />
+                    </button>
+                  ))}
+                  <button
+                    onClick={() => scrollTo("contact")}
+                    className="px-6 py-2 bg-gradient-to-r from-red-600 to-rose-600 text-white rounded-xl text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-300"
+                  >
+                    Let&apos;s Talk
+                  </button>
                 </div>
               </AnimatedContent>
 
-              {/* Main Heading */}
-              <AnimatedContent 
-                distance={120}
-                direction="vertical"
-                reverse={false}
-                initialOpacity={0.3}
-                animateOpacity
-                scale={1.01}
-                threshold={0.2}
+              {/* Mobile menu button */}
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="md:hidden p-2 text-slate-600 hover:text-blue-600 transition-colors"
+                aria-label="Toggle menu"
               >
-                <div className="space-y-6">
-                  <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-                    <span className="bg-gradient-to-r from-neutral-800 via-slate-700 to-neutral-600 bg-clip-text text-transparent">
-                      Hello I'am Mochamad Yusuf
-                    </span>
-                  </h1>
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  {menuOpen ? (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  ) : (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  )}
+                </svg>
+              </button>
+            </div>
+
+            {/* Mobile dropdown */}
+            {menuOpen && (
+              <div className="md:hidden mt-4 pb-4 border-t border-red-100 pt-4 flex flex-col gap-3">
+                {[
+                  { label: "Home", id: "home" },
+                  { label: "About", id: "about" },
+                  { label: "Projects", id: "projects" },
+                  { label: "Certificates", id: "certificates" },
+                  { label: "Contact", id: "contact" },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      scrollTo(item.id);
+                      setMenuOpen(false);
+                    }}
+                    className="text-left text-slate-600 hover:text-red-600 font-medium py-1 transition-colors"
+                  >
+                    {item.label}
+                  </button>
+                ))}
+                <button
+                  onClick={() => {
+                    scrollTo("contact");
+                    setMenuOpen(false);
+                  }}
+                  className="mt-2 px-6 py-2 bg-gradient-to-r from-red-600 to-rose-600 text-white rounded-xl text-sm font-medium text-center"
+                >
+                  Let&apos;s Talk
+                </button>
+              </div>
+            )}
+          </div>
+        </nav>
+
+        {/* About Section */}
+        <section id="home" className="pt-24 pb-20 relative">
+          <div className="absolute inset-0 opacity-20 z-0">
+            <div className="bg-white"></div>
+          </div>
+
+          <div className="container mx-auto px-4 sm:px-6 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center min-h-[85vh] py-8 lg:py-0">
+              
+              {/* Left Content */}
+              <div className="lg:col-span-5 order-1 lg:order-1 flex justify-center lg:justify-end">
+                <div className="relative w-full h-[400px] lg:h-[500px] flex items-center justify-center">
+                  {/* Decorative Background */}
+                  <div className="absolute -top-8 -left-8 w-16 h-16 bg-gradient-to-br from-neutral-500/5 to-slate-500/5 rounded-full blur-xl"></div>
+                  <div className="absolute -bottom-6 -right-6 w-12 h-12 bg-gradient-to-br from-zinc-500/5 to-neutral-500/5 rounded-full blur-lg"></div>
                   
-                  <div className="flex flex-wrap items-center gap-4">
-                    <RotatingText
-                      texts={['Programmer', 'Full-Stack Developer', 'Mobile Developer']}
-                      mainClassName="px-8 py-4 bg-gradient-to-r from-neutral-800 via-slate-700 to-zinc-800 text-white rounded-2xl text-3xl lg:text-4xl font-bold inline-flex transition-all shadow-2xl shadow-neutral-500/20 hover:shadow-neutral-500/30 transform hover:scale-[1.02] border border-white/10"
-                      staggerFrom={"center"}
-                      initial={{ y: "120%" }}
-                      animate={{ y: 0 }}
-                      exit={{ y: "-120%" }}
-                      staggerDuration={0.03}
-                      splitLevelClassName="overflow-hidden pb-1"
-                      transition={{ type: "spring", damping: 35, stiffness: 500 }}
-                      rotationInterval={4000}
+                  {/* TiltedCard */}
+                  <div className="h-auto scale-75 lg:scale-90">
+                    <TiltedCard
+                      imageSrc="assets/titled-card/Foto_1_x_1.jpg"
+                      altText="Mochamad Yusuf - Programmer"
+                      captionText="Mochamad Yusuf - Programmer"
+                      containerHeight="300px"
+                      containerWidth="300px"
+                      imageHeight="300px"
+                      imageWidth="300px"
+                      rotateAmplitude={12}
+                      scaleOnHover={1.05}
+                      showMobileWarning={false}
+                      showTooltip
+                      displayOverlayContent
                     />
                   </div>
                 </div>
-              </AnimatedContent>
-
-              {/* Description */}
-              <div className="max-w-3xl">
-                <BlurText
-                  text="My name is Mochamad Yusuf, a graduate of Kuningan University. I have experience as a programmer at ASTEX Solution from 2018 to 2020, creating MLM websites, 10x query optimization, and MLM mobile applications. I am currently a freelance programmer working on the SPMB website for SMK Muhamadiyyah 2 Kuningan and a tracer study for ​​University Siber Syekh Nurjati."
-                  delay={80}
-                  animateBy="words"
-                  direction="top"
-                  className="text-xl lg:text-2xl text-neutral-600 leading-relaxed font-black"
-                />
               </div>
 
-              {/* CTA Buttons */}
-              <AnimatedContent 
-                distance={80}
-                direction="vertical"
-                reverse={false}
-                initialOpacity={0}
-                animateOpacity
-                threshold={0.3}
-              >
-                <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <button className="group px-10 py-5 bg-gradient-to-r from-neutral-800 via-slate-700 to-zinc-800 text-white rounded-2xl font-semibold shadow-2xl shadow-neutral-500/20 hover:shadow-neutral-500/30 transform hover:scale-[1.02] transition-all duration-300 flex items-center gap-3 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-700 via-zinc-700 to-neutral-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <span className="relative z-10">Explore My Journey</span>
-                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </button>
-                  
-                  <button className="px-10 py-5 border-2 border-neutral-300 text-neutral-700 rounded-2xl font-semibold hover:bg-neutral-800 hover:text-white hover:border-neutral-800 transition-all duration-300 backdrop-blur-sm bg-white/60">
-                    Download Resume
-                  </button>
-                </div>
-              </AnimatedContent>
+              {/* Right Content */}
+              <div className="lg:col-span-7 order-2 lg:order-2">
+                <div className="space-y-8 max-w-4xl">
+                  {/* Status Badge */}
+                  <AnimatedContent
+                    distance={50}
+                    direction="vertical"
+                    reverse={false}
+                    initialOpacity={0}
+                    animateOpacity
+                    threshold={0.1}
+                  >
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 border border-green-200 rounded-full shadow-sm backdrop-blur-sm">
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                      <span className="text-green-700 text-sm font-medium">
+                        Available for opportunities
+                      </span>
+                    </div>
+                  </AnimatedContent>
 
-              {/* Social Media */}
-              <AnimatedContent 
-                distance={60}
-                direction="horizontal"
-                reverse={false}
-                initialOpacity={0}
-                animateOpacity
-                threshold={0.4}
-              >
-                <div className="flex gap-4 pt-4">
-                  {[
-                    { 
-                      name: 'GitHub', 
-                      icon: 'M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z',
-                      color: 'hover:bg-neutral-800'
-                    },
-                    { 
-                      name: 'LinkedIn', 
-                      icon: 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z',
-                      color: 'hover:bg-blue-600'
-                    },
-                    { 
-                      name: 'Instagram', 
-                      icon: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z',
-                      color: 'hover:bg-rose-500'
-                    },
-                    { 
-                      name: 'Email', 
-                      icon: 'M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
-                      color: 'hover:bg-emerald-600'
-                    }
-                  ].map((social, index) => (
-                    <a 
-                      key={social.name}
-                      href="#" 
-                      className={`group w-12 h-12 bg-white/80 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 border border-white/60 ${social.color} hover:text-white`}
-                      title={social.name}
+                  {/* Main Heading */}
+                  <div className="space-y-6">
+                    <AnimatedContent
+                      distance={80}
+                      direction="vertical"
+                      reverse={false}
+                      initialOpacity={0}
+                      animateOpacity
+                      threshold={0.2}
                     >
-                      <svg className="w-5 h-5 text-neutral-700 group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                        <path d={social.icon}/>
-                      </svg>
-                    </a>
-                  ))}
+                      <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-slate-800 leading-tight">
+                        Hello, I&apos;am
+                      </h1>
+                    </AnimatedContent>
+
+                    <AnimatedContent
+                      distance={80}
+                      direction="vertical"
+                      reverse={false}
+                      initialOpacity={0}
+                      animateOpacity
+                      threshold={0.2}
+                    >
+                      <div className="flex flex-wrap items-center gap-3">
+                        <RotatingText
+                          texts={[
+                            "Programmer",
+                            "Full-Stack Developer",
+                            "Mobile Solver",
+                          ]}
+                          mainClassName="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-red-600 to-rose-600 text-white rounded-2xl text-xl sm:text-2xl lg:text-4xl font-bold inline-flex transition-all shadow-lg"
+                          staggerFrom="center"
+                          initial={{ y: "100%" }}
+                          animate={{ y: 0 }}
+                          exit={{ y: "-100%" }}
+                          staggerDuration={0.03}
+                          splitLevelClassName="overflow-hidden"
+                          transition={{
+                            type: "spring",
+                            damping: 25,
+                            stiffness: 400,
+                          }}
+                          rotationInterval={3500}
+                        />
+                      </div>
+                    </AnimatedContent>
+                  </div>
+
+                  {/* Name */}
+                  <div className="space-y-2">
+                    <SplitText
+                      text="Mochamad Yusuf"
+                      className="text-3xl sm:text-5xl lg:text-7xl font-bold leading-tight bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text"
+                      delay={100}
+                      from={{ opacity: 0, transform: "translate3d(0,60px,0)" }}
+                      to={{ opacity: 1, transform: "translate3d(0,0,0)" }}
+                      threshold={0.2}
+                      rootMargin="-30px"
+                    />
+                  </div>
+
+                  {/* Description */}
+                  <div className="max-w-2xl">
+                    <BlurText
+                      text="My name is Mochamad Yusuf, a graduate of Kuningan University. I have experience as a programmer at ASTEX Solution from 2018 to 2020, creating MLM websites, 10x query optimization, and MLM mobile applications. I am currently a freelance programmer working on the SPMB website for SMK Muhamadiyyah 2 Kuningan and a tracer study for ​​University Siber Syekh Nurjati."
+                      delay={60}
+                      animateBy="words"
+                      direction="top"
+                      className="text-base sm:text-xl text-slate-600 leading-relaxed"
+                    />
+                  </div>
+
+                  {/* CTA Buttons */}
+                  <AnimatedContent
+                    distance={60}
+                    direction="vertical"
+                    reverse={false}
+                    initialOpacity={0}
+                    animateOpacity
+                    threshold={0.3}
+                  >
+                    <div className="flex flex-col sm:flex-row gap-4 pt-6">
+                      <button
+                        onClick={() => scrollTo("projects")}
+                        className="px-8 py-4 bg-gradient-to-r from-red-600 to-rose-600 text-white rounded-xl font-medium hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+                      >
+                        View My Work
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                          />
+                        </svg>
+                      </button>
+
+                      <button
+                        onClick={() => scrollTo("contact")}
+                        className="px-8 py-4 border-2 border-red-200 text-slate-700 rounded-xl font-medium hover:bg-red-50 hover:border-red-300 transition-all duration-300 backdrop-blur-sm"
+                      >
+                        Get In Touch
+                      </button>
+                    </div>
+                  </AnimatedContent>
                 </div>
-              </AnimatedContent>
+              </div>
             </div>
           </div>
+        </section>
 
-        </div>
-      </section>
+        {/* Projects Section */}
+        <section
+          id="projects"
+          className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100 relative"
+        >
+          <div className="absolute inset-0 opacity-10 z-0">
+            <div className="bg-white"></div>
+          </div>
+
+          <div className="container mx-auto px-6 relative z-10">
+            <AnimatedContent
+              distance={80}
+              direction="vertical"
+              reverse={false}
+              initialOpacity={0}
+              animateOpacity
+              threshold={0.3}
+            >
+              <div className="text-center mb-16">
+                <h2 className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent mb-6">
+                  Projects
+                </h2>
+                <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+                  A showcase of projects
+                </p>
+              </div>
+            </AnimatedContent>
+
+            <div className="max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {PROJECTS.map((project, index) => (
+                  <AnimatedContent
+                    key={index}
+                    distance={60}
+                    direction="vertical"
+                    reverse={false}
+                    initialOpacity={0}
+                    animateOpacity
+                    threshold={0.4}
+                  >
+                    <div className="bg-white/80 backdrop-blur-sm border border-red-100 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group flex flex-col h-full">
+                      {/* Preview area */}
+                      {project.image ? (
+                        <div 
+                          className="w-full h-40 relative border-b border-red-50 cursor-pointer"
+                          onClick={() => setSelectedProject(project)}
+                        >
+                          <Image
+                            src={project.image}
+                            alt={project.title}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      ) : (
+                        <div
+                          onClick={() => setSelectedProject(project)}
+                          className={`w-full h-40 bg-gradient-to-br ${project.gradient} flex items-center justify-center relative overflow-hidden cursor-pointer`}
+                        >
+                          <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.3),transparent_70%)]" />
+                          <span className="text-white/80 text-5xl font-black tracking-tighter select-none drop-shadow">
+                            {project.title.split(" ")[0].toUpperCase()}
+                          </span>
+                        </div>
+                      )}
+
+                      <div className="p-6 flex flex-col flex-1">
+                        <div className="flex justify-between items-start mb-3">
+                          <span
+                            className={`px-3 py-1 rounded-full text-xs font-medium border ${project.statusColor}`}
+                          >
+                            {project.status}
+                          </span>
+                          <div className="flex gap-2">
+                            {/* GitHub button */}
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              title="Lihat di GitHub"
+                              className="w-8 h-8 bg-slate-100 hover:bg-slate-800 hover:text-white rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110 text-slate-600"
+                            >
+                              <svg
+                                className="w-4 h-4"
+                                fill="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                              </svg>
+                            </a>
+                            {/* Live button */}
+                            {project.live ? (
+                              <a
+                                href={project.live}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Lihat website"
+                                className="w-8 h-8 bg-red-100 hover:bg-red-600 hover:text-white rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110 text-red-600"
+                              >
+                                <svg
+                                  className="w-4 h-4"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                  />
+                                </svg>
+                              </a>
+                            ) : (
+                              <div
+                                title="Belum ada live demo"
+                                className="w-8 h-8 bg-slate-50 rounded-lg flex items-center justify-center text-slate-300 cursor-not-allowed"
+                              >
+                                <svg
+                                  className="w-4 h-4"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                  />
+                                </svg>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        <h3 className="text-xl font-bold text-slate-800 mb-3">
+                          {project.title}
+                        </h3>
+                        <p className="text-slate-600 mb-4 leading-relaxed text-sm flex-1">
+                          {project.description}
+                        </p>
+
+                        <div className="flex flex-wrap gap-2">
+                          {project.tech.map((tech, ti) => (
+                            <span
+                              key={ti}
+                              className="px-3 py-1 bg-red-100 text-red-700 rounded-lg text-xs font-medium"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </AnimatedContent>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
 
       {/* Projects Section */}
       <section id="projects" className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -267,9 +572,9 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
-                  title: "Portfolio Website",
+                  title: "Portofolio Website",
                   description: "Modern, responsive portfolio with smooth animations, 3D object, and interactive components showcasing contemporary web development.",
-                  tech: ["Next.js", "Three.js", "Framer Motion", "CSS3"],
+                  tech: ["Next.js", "Tailwind.css", "Framer Motion", "CSS3"],
                   status: "Live",
                   statusColor: "bg-green-100 text-green-800 border-green-200",
                   type: "Personal Project"
