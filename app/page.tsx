@@ -323,14 +323,12 @@ export default function Home() {
 
                   {/* Name */}
                   <div className="space-y-2">
-                    <SplitText
+                    <BlurText
                       text="Mochamad Yusuf"
+                      delay={60}
+                      animateBy="letters"
+                      direction="top"
                       className="text-3xl sm:text-5xl lg:text-7xl font-bold leading-tight bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text"
-                      delay={100}
-                      from={{ opacity: 0, transform: "translate3d(0,60px,0)" }}
-                      to={{ opacity: 1, transform: "translate3d(0,0,0)" }}
-                      threshold={0.2}
-                      rootMargin="-30px"
                     />
                   </div>
 
