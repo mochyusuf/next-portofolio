@@ -80,7 +80,19 @@ const PROJECTS = [
     image: "/assets/projects/congklak.jpg",
     github: "https://github.com/mochyusuf/Congklak",
     live: "https://play.google.com/store/apps/details?id=com.mochyusuf.congklak",
-  }
+  }, 
+  {
+    title: "Server Arab Dictionary",
+    description:
+      "Server to manage content in Arab Indonesia Dictionary",
+    tech: ["Server", "API", "Website", "Laravel"],
+    status: "Live",
+    statusColor: "bg-purple-100 text-purple-800 border-purple-200",
+    gradient: "from-teal-400 to-cyan-500",
+    image: "/assets/projects/server-kamus-arab.png",
+    github: "https://github.com/mochyusuf/server-kamus-arab",
+    live: "https://kamus-arab.infinityfree.me/",
+  }, 
 ];
 
 const CERTIFICATES = [
@@ -416,6 +428,7 @@ export default function Home() {
                       </button>
                       <a 
                         href="/CV_ATS_Mochamad_Yusuf_English.pdf"
+                        target="_blank"
                         className="px-8 py-4 border-2 border-red-400 text-white bg-gradient-to-r from-red-400 to-rose-400 rounded-xl font-medium hover:bg-red-50 hover:border-red-300 transition-all duration-300"
                       >
                         Resume
