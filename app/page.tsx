@@ -93,6 +93,18 @@ const PROJECTS = [
     github: "https://github.com/mochyusuf/server-kamus-arab",
     live: "https://kamus-arab.infinityfree.me/",
   }, 
+  {
+    title: "Coronavirus Machine Learning",
+    description:
+      "Machine learning operation to clasification text-based coronavirus tweet have positive sentiment or not",
+    tech: ["Machine Learning", "Artificial Intelegent", "Coronavirus", "Railways"],
+    status: "Live",
+    statusColor: "bg-purple-100 text-purple-800 border-purple-200",
+    gradient: "from-teal-400 to-cyan-500",
+    image: "/assets/projects/coronavirus-machine-learning.png",
+    github: "https://github.com/mochyusuf/MLOps-Submission-2",
+    live: "https://mlops-submission-2-production-2244.up.railway.app/v1/models/coronavirus-model/metadata",
+  }, 
 ];
 
 const CERTIFICATES = [
